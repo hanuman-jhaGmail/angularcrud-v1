@@ -8,15 +8,10 @@ import { EmployeeService } from './employee.service';
 })
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
-  dataFromChild: Employee;
   constructor(private _employeeService: EmployeeService) {
    }
 
   ngOnInit() {
     this.employees = this._employeeService.getEmployee();
-  }
-
-  handleNotify(eventData: Employee) {
-    this.dataFromChild = eventData;
   }
 }
