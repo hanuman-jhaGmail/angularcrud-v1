@@ -8,6 +8,7 @@ import { EmployeeService } from './employee.service';
 })
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
+  dataFromChild: Employee;
   constructor(private _employeeService: EmployeeService) {
    }
 
@@ -15,4 +16,7 @@ export class ListEmployeesComponent implements OnInit {
     this.employees = this._employeeService.getEmployee();
   }
 
+  handleNotify(eventData: Employee) {
+    this.dataFromChild = eventData;
+  }
 }
