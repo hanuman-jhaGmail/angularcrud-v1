@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
-import { EmployeeService } from './employee.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -25,23 +24,19 @@ export class ListEmployeesComponent implements OnInit {
       employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
-  constructor(private _employeeService: EmployeeService, private _router: Router,
+  constructor(private _router: Router,
     private _route: ActivatedRoute) {
-  }
-
-  ngOnInit() {
-    this._employeeService.getEmployees().subscribe((empList) => {
-      this.employees = empList;
-      console.log('Subscribe : ' + new Date().toTimeString());
+      this.employees = this._route.snapshot.data['employeeList'];
       if (this._route.snapshot.queryParamMap.has('searchTerm')) {
         this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm');
       } else {
         this.filteredEmployees = this.employees;
-        console.log(this.employees.length);
-        console.log('Else Block : ' + new Date().toTimeString());
       }
-    });
   }
+
+  ngOnInit() {
+  }
+
   onClick(employeeId: Number) {
     this._router.navigate(['/employees', employeeId]);
   }
