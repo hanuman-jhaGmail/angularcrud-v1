@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
 // Branch AngularCrud-V2
 // Test commit to new Branch
 @Injectable()
@@ -40,8 +44,8 @@ export class EmployeeService {
         },
     ];
 
-    getEmployees(): Employee[] {
-        return this.listEmployees;
+    getEmployees(): Observable<Employee[]> {
+        return of(this.listEmployees).pipe(delay(2000));
     }
 
     getEmployee(id: Number): Employee {
