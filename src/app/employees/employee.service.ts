@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 // Branch AngularCrud-V2
 // Test commit to new Branch
 @Injectable()
 export class EmployeeService {
+    constructor (private _httpClient: HttpClient) {}
     private listEmployees: Employee[] = [
         {
             id: 1,
@@ -45,7 +48,18 @@ export class EmployeeService {
     ];
 
     getEmployees(): Observable<Employee[]> {
-        return of(this.listEmployees).pipe(delay(2000));
+        return this._httpClient.get<Employee[]>('http://localhost:3000/employees').pipe(catchError(this.handleError));
+        // return of(this.listEmployees).pipe(delay(2000));
+    }
+
+    private handleError(errorResponse: HttpErrorResponse) {
+        if (errorResponse.error instanceof ErrorEvent) {
+            console.error('Client side error : ', errorResponse.error.message);
+        } else {
+            console.error('Server side error : ', errorResponse);
+        }
+
+        return throwError('There is the problem with the service. We are notified and working on it. Please try again later.');
     }
 
     getEmployee(id: Number): Employee {
