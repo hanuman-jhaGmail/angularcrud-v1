@@ -31,13 +31,13 @@ export class CreateEmployeeComponent implements OnInit {
     photoPath: null
   };
   departments: Department[] = [
-    {id: 1, name: 'Help Desk'},
-    {id: 2, name: 'HR'},
-    {id: 3, name: 'IT'},
-    {id: 4, name: 'Payroll'}
+    { id: 1, name: 'Help Desk' },
+    { id: 2, name: 'HR' },
+    { id: 3, name: 'IT' },
+    { id: 4, name: 'Payroll' }
   ];
   constructor(private _employeeService: EmployeeService,
-              private _router: Router, private _route: ActivatedRoute) {
+    private _router: Router, private _route: ActivatedRoute) {
     this.datePickerConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
@@ -72,7 +72,10 @@ export class CreateEmployeeComponent implements OnInit {
       this.createEmployeeForm.reset();
     } else {
       this.panelTitle = 'Edit Employee';
-      this.employee = Object.assign({}, this._employeeService.getEmployee(id));
+      this._employeeService.getEmployee(id).subscribe(
+        (employee) => this.employee = employee,
+        (err: any) => console.log(err)
+      );
     }
   }
 
@@ -80,9 +83,27 @@ export class CreateEmployeeComponent implements OnInit {
     this.previewPhoto = !this.previewPhoto;
   }
   saveEmployee(): void {
-    const newEmployee: Employee = Object.assign({}, this.employee);
-    this._employeeService.save(newEmployee);
-    this.createEmployeeForm.reset();
-    this._router.navigate(['list']);
+    if (this.employee.id == null) {
+      this._employeeService.addEmployee(this.employee).subscribe(
+        (data: Employee) => {
+          console.log(data);
+          this.createEmployeeForm.reset();
+          this._router.navigate(['list']);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this._employeeService.updateEmployee(this.employee).subscribe(
+        () => {
+          this.createEmployeeForm.reset();
+          this._router.navigate(['list']);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

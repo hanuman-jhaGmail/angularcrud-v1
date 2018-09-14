@@ -2,7 +2,7 @@
   "employees": [
     {
       "id": 1,
-      "name": "Nick",
+      "name": "Nick 2",
       "gender": "Male",
       "contactPreference": "Email",
       "email": "mark@pragimtech.com",
@@ -32,6 +32,54 @@
       "department": "3",
       "isActive": false,
       "photoPath": "assets/images/john.png"
+    },
+    {
+      "id": 4,
+      "name": "HANUMAN KUMAR JHA",
+      "gender": "Male",
+      "contactPreference": "Email",
+      "phoneNumber": "8017135483",
+      "email": "hanuman.jha232@gmail.com",
+      "dateOfBirth": "2018-09-08T18:30:00.000Z",
+      "department": "3",
+      "isActive": true,
+      "photoPath": "assets/images/mark.png"
+    },
+    {
+      "id": 6,
+      "name": "Aman",
+      "gender": "Male",
+      "contactPreference": "Email",
+      "phoneNumber": "589654235",
+      "email": "ameetd@quinnox.com",
+      "dateOfBirth": "2018-09-16T04:14:12.000Z",
+      "department": "3",
+      "isActive": true,
+      "photoPath": "assets/images/mark.png"
+    },
+    {
+      "id": 8,
+      "name": "Anuj",
+      "gender": "Male",
+      "contactPreference": "Email",
+      "phoneNumber": "56232451",
+      "email": "am@gmail.com",
+      "dateOfBirth": "2018-09-02T18:30:00.000Z",
+      "department": "1",
+      "isActive": true,
+      "photoPath": "assets/images/mark.png"
+    },
+    {
+      "id": 10,
+      "name": "Mira",
+      "gender": "Male",
+      "contactPreference": "Email",
+      "phoneNumber": "778754542",
+      "email": "m@gmail.com",
+      "dateOfBirth": "2018-09-08T18:30:00.000Z",
+      "department": "1",
+      "isActive": true,
+      "photoPath": "assets/images/mary.png"
     }
   ]
 }
